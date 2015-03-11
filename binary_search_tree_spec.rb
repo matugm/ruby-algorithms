@@ -18,6 +18,17 @@ describe BinaryTree do
     expect(bigger_tree.search(5)).to be_a Node
   end
 
+  it "should be able to delete a leaf node" do
+    bigger_tree.delete(5)
+    expect(bigger_tree.search(5)).to be_falsey
+  end
+
+  it "should be able to delete a node with one children" do
+    bigger_tree.delete(9)
+    expect(bigger_tree.search(5)).to be_truthy
+    expect(bigger_tree.search(9)).to be_falsey
+  end
+
   it "should be able to traverse the tree in 'level-order'" do
     expect(bigger_tree.breadth_first).to eq [10, 4, 12, 2, 9, 5]
   end

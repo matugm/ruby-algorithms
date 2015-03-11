@@ -1,9 +1,10 @@
 
 class BinaryTree
-  attr_reader :root
+  attr_reader :root, :search_path
 
   def initialize(root_value)
     @root = Node.new(root_value)
+    @search_path = Array.new
   end
 
   def insert(value, node = @root)
@@ -24,9 +25,11 @@ class BinaryTree
   def search(num)
     stack = []
     stack << @root
+    @search_path.clear
 
     while stack.size > 0
       node = stack.shift
+      @search_path << node
 
       return node  if node.value == num
       return false if node.left.nil? && node.right.nil?
@@ -37,6 +40,20 @@ class BinaryTree
         stack << node.right
       end
     end
+  end
+
+  def delete(value)
+    return unless search(value)
+
+    if (children = @search_path.last.left || @search_path.last.left)
+      # One children
+      update_parent_node(value, children)
+    else
+      # Leaf node
+      update_parent_node(value)
+    end
+
+    @search_path.last.value = nil
   end
 
   def in_order(focus_node = @root, values = [])
@@ -93,6 +110,14 @@ class BinaryTree
       node.right = Node.new(value)
     else
       insert(value, node.right)
+    end
+  end
+
+  def update_parent_node(search_value, new_value = nil)
+    if @search_path[-2].left == search_value
+      @search_path[-2].left = new_value
+    else
+      @search_path[-2].right = new_value
     end
   end
 end
