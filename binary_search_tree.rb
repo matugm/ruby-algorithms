@@ -28,20 +28,19 @@ class BinaryTree
     while stack.size > 0
       node = stack.shift
 
+      return node  if node.value == num
+      return false if node.left.nil? && node.right.nil?
+
       if num < node.value
-        stack << node.left  unless node.left.nil?
+        stack << node.left
       else
-        stack << node.right unless node.right.nil?
+        stack << node.right
       end
-
-      return node if node.value == num
     end
-
-    false
   end
 
   def in_order(focus_node = @root, values = [])
-    if !focus_node.nil?
+    unless focus_node.nil?
       in_order(focus_node.left, values)
       values << focus_node.value
       in_order(focus_node.right, values)
@@ -77,14 +76,6 @@ class BinaryTree
     end
 
     values
-  end
-
-  def print
-    @root
-  end
-
-  def node_count
-    @root.size
   end
 
   private
