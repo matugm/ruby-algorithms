@@ -4,7 +4,7 @@ class BinaryTree
 
   def initialize(root_value)
     @root = Node.new(root_value)
-    @search_path = Array.new
+    @search_path = []
   end
 
   def insert(value, node = @root)
