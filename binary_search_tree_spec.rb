@@ -8,7 +8,14 @@ describe BinaryTree do
     tree
   }
 
-  it "should have be able to initialize with a root node" do
+  let(:right_leaf_tree) {
+    tree = BinaryTree.new(11)
+    nums = [4, 9, 10, 12, 2]
+    nums.each { |n| tree.insert(n) }
+    tree
+  }
+
+  it "should be able to initialize with a root node" do
     expect(tree.root.value).to eq 10
     expect(tree.root.left).to be_nil
     expect(tree.root.right).to be_nil
@@ -27,6 +34,13 @@ describe BinaryTree do
     bigger_tree.delete(9)
     expect(bigger_tree.search(5)).to be_truthy
     expect(bigger_tree.search(9)).to be_falsey
+  end
+
+  # 11 is root, 10 is our leaf
+  it "should be able to delete a node with children on the right" do
+    right_leaf_tree.delete(9)
+    expect(right_leaf_tree.search(10)).to be_truthy
+    expect(right_leaf_tree.search(9)).to be_falsey
   end
 
   it "should be able to traverse the tree in 'level-order'" do

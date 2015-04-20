@@ -45,7 +45,7 @@ class BinaryTree
   def delete(value)
     return unless search(value)
 
-    if (children = @search_path.last.left || @search_path.last.left)
+    if (children = @search_path.last.left || @search_path.last.right)
       # One children
       update_parent_node(value, children)
     else
