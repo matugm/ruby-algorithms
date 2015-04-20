@@ -1,19 +1,16 @@
 require_relative 'binary_search_tree'
 
+def build_tree(numbers, root)
+  tree = BinaryTree.new(root)
+  numbers.each { |n| tree.insert(n) }
+  tree
+end
+
 describe BinaryTree do
   let(:tree) { BinaryTree.new(10) }
-  let(:bigger_tree) {
-    nums = [4, 9, 5, 12, 2]
-    nums.each { |n| tree.insert(n) }
-    tree
-  }
 
-  let(:right_leaf_tree) {
-    tree = BinaryTree.new(11)
-    nums = [4, 9, 10, 12, 2]
-    nums.each { |n| tree.insert(n) }
-    tree
-  }
+  let(:bigger_tree)     { build_tree([4, 9, 5, 12, 2], 10)  }
+  let(:right_leaf_tree) { build_tree([4, 9, 10, 12, 2], 11) }
 
   it "should be able to initialize with a root node" do
     expect(tree.root.value).to eq 10
