@@ -26,4 +26,3 @@ def check_luhn(nums)
 end
 
 p check_luhn "1762483"
-
