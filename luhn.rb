@@ -1,28 +1,29 @@
 
-def check_luhn(nums)
-  nums = nums.split(//).map(&:to_i)
+class Luhn
+  def self.check(nums)
+    nums = nums.split(//).map(&:to_i)
 
-  def double_odds(nums)
+    doubled = double_odds(nums)
+    total   = separate_and_sum(doubled)
+    total % 10 == 0
+  end
+
+  def self.double_odds(nums)
     nums.each_with_index do |n, idx|
       nums[idx] *= 2 if idx.odd?
     end
   end
 
-  def separate_and_sum(nums)
-    sum = 0
-    nums.each_with_index do |n, idx|
-      if n > 9
-        sum += (nums[idx] % 10) + 1
-      else
-        sum += n
-      end
-    end
-    sum
+  def self.mod_ten(n)
+    (n % 10) + 1
   end
 
-  doubled = double_odds(nums)
-  total   = separate_and_sum(doubled)
-  total % 10 == 0
+  def self.separate_and_sum(nums)
+    nums.inject do |sum, n|
+      sum += n > 9 ? mod_ten(n) : n
+    end
+  end
 end
 
-p check_luhn "1762483"
+p Luhn.check "1762483" # Should be true
+p Luhn.check "1762485" # Should be false
