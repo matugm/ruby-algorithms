@@ -9,7 +9,7 @@ class Luhn
   end
 
   def self.double_odds(nums)
-    nums.each_with_index do |n, idx|
+    nums.each_with_index do |_, idx|
       nums[idx] *= 2 if idx.odd?
     end
   end
