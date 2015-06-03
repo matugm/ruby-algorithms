@@ -6,12 +6,10 @@ def binary_search(input, target)
   return false if input.size == 1
 
   if target < input[mid]
-    input = input[0, mid]
+    binary_search(input[0..mid], target)
   else
-    input = input[mid, input.size]
+    binary_search(input[mid..-1], target)
   end
-
-  binary_search(input, target)
 end
 
 input = [1, 2, 4, 7, 9, 12, 15]
