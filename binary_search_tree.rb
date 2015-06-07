@@ -8,12 +8,6 @@ class BinaryTree
   end
 
   def insert(value, node = @root)
-    # Base case: we found an empty leaf
-    if node.value.nil?
-      node.value = value
-      return
-    end
-
     if value > node.value
       insert_right(node, value)
     else
