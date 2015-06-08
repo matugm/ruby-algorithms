@@ -62,14 +62,14 @@ class BinaryTree
 
   # Also know as level order in binary tree parlance
   def breadth_first
-    stack  = []
+    queue  = []
     values = []
-    stack << @root
+    queue << @root
 
-    while stack.size > 0
-      node = stack.shift
-      stack << node.left  unless node.left.nil?
-      stack << node.right unless node.right.nil?
+    while queue.size > 0
+      node = queue.shift
+      queue << node.left  unless node.left.nil?
+      queue << node.right unless node.right.nil?
 
       values << node.value
     end
