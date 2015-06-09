@@ -17,8 +17,9 @@ describe UndirectedGraph do
     graph.insert("B", "A")
     graph.insert("C", "A")
     graph.insert("D", "C")
+    graph.insert("G", "C")
 
-    expect(graph.bfs(["A"])).to eq ["A", "B", "C", "D"]
+    expect(graph.bfs(["A"])).to eq ["A", "B", "C", "D", "G"]
   end
 
   it "can delete nodes" do

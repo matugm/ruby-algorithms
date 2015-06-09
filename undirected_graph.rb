@@ -36,17 +36,18 @@ class UndirectedGraph
 
   # Breadth-first search
   def bfs(queue, values = [])
-    return values if queue.empty?
 
-    node = get_node(queue.shift)
-    values << node.value
+    while queue.any?
+      node = get_node(queue.shift)
+      values << node.value
 
-    node.each_neighbor do |n|
-      visited = values.include?(n) && !queue.include?(n)
-      queue << n unless visited
+      node.each_neighbor do |n|
+        visited = values.include?(n) && !queue.include?(n)
+        queue << n unless visited
+      end
     end
 
-    bfs(queue, values)
+    values
   end
 
   def node_count
