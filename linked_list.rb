@@ -1,9 +1,19 @@
 class LinkedList
   attr_reader :count
 
+  include Enumerable
+
   def initialize
     @head  = nil
     @count = 0
+  end
+
+  def each(&block)
+    @head.each_node(&block)
+  end
+
+  def find(value)
+    each.find { |node| node.value == value }
   end
 
   def append(value)
@@ -13,9 +23,7 @@ class LinkedList
     @head ? @head.append(new_node) : @head = new_node
   end
 
-  def find(value)
-    @head.each_node.any? { |node| node.value == value }
-  end
+  alias_method :<<, :append
 end
 
 class Node
@@ -27,7 +35,7 @@ class Node
   end
 
   def append(new_node)
-    self.each_node { |node| node.next = new_node and break if !node.next }
+    each_node { |node| node.next = new_node and break if !node.next }
   end
 
   def each_node
