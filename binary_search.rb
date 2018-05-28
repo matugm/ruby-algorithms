@@ -3,7 +3,7 @@ def binary_search(input, target)
   mid = (input.size / 2).floor
 
   return true  if input[mid] == target
-  return false if input.size == 1
+  return false if input.size <= 1
 
   if target < input[mid]
     binary_search(input[0...mid], target)
@@ -21,3 +21,5 @@ p binary_search(input, 1)   == true
 p binary_search(input, -1)  == false
 p binary_search(input, 0)   == false
 p binary_search(input, 999) == false
+
+p binary_search([], 15)     == false
