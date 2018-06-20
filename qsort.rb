@@ -1,16 +1,11 @@
+def quick_sort(list)
+  return [] if list.empty?
 
-def qsort(list)
-  return list if list.size <= 1
+  groups = list.group_by { |n| n <=> list.first }
 
-  first = list.sample
-  less_than    = []
-  greater_than = []
+  less_than    = groups[-1] || []
+  first        = groups[0]  || []
+  greater_than = groups[1]  || []
 
-  list.each do |n|
-    n < first ? (less_than << n) : (greater_than << n)
-  end
-
-  qsort(less_than) + qsort(greater_than)
+  quick_sort(less_than) + first + quick_sort(greater_than)
 end
-
-p qsort [3, 7, 2, 1, 8, 12]
